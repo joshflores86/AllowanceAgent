@@ -10,9 +10,10 @@ import SwiftData
 
 @main
 struct AllowanceAgentApp: App {
-    var sharedModelContainer: ModelContainer = {
+    var mainModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            UserModel.self, UserPaidModel.self
+
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -25,8 +26,16 @@ struct AllowanceAgentApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreen(viewModel: DataViewModel(usersInfo: UserModel(id: UUID(),
+                                                                       name: "",
+                                                                       amount: "",
+                                                                       avatarImageData: Data(), 
+                                                                       initialValue: [""],
+                                                                       secondValue: [""],
+                                                                       valueHolder: [""],
+                                                                       steps: 0,
+                                                                       dueDate: "",
+                                                                       billsArray: ["":[""]])))
         }
-        .modelContainer(sharedModelContainer)
-    }
+        .modelContainer(mainModelContainer)    }
 }
