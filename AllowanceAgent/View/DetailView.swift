@@ -63,23 +63,17 @@ struct DetailView: View {
                     VStack{
                         Text("Final Pay")
                             .font(.system(size: 20, weight: .heavy, design: .monospaced))
-                        
-                        Text(viewModel.addingCurrencySym(value: finalAmount))
+                        Text(finalAmount)
                             .font(.system(size: 26, weight: .medium, design: .monospaced))
-                        
                     }
                     .foregroundStyle(Color(rightSideColor!))
                     .padding(.trailing, 10)
                 }
                 Spacer()
-                if user.initialValue.isEmpty {
-                    EmptyView2()
-                        .offset(y: -200)
-                }else{
                     List {
                         ForEach(0..<user.initialValue.count) { num in
                             HStack {
-                                VStack {
+                                VStack(alignment: .leading) {
                                     Text(user.initialValue[num])
                                     Text(user.secondValue[num])
                                         .font(.system(size: 20, weight: .bold, design: .monospaced))
@@ -94,12 +88,11 @@ struct DetailView: View {
                             }
                         }
                     }
-                }
             }
-            .onAppear{
-                finalAmount = String(format: "%.2f", viewModel.calFinalPayment(user: user))
-                print(user.avatarImage)
-            }
+//            .onAppear{
+//                finalAmount = viewModel.calFinalPayment(user: user)
+//                
+//            }
             .background {
                 BlurBackground()
             }

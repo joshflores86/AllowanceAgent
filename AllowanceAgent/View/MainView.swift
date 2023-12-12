@@ -23,9 +23,9 @@ struct MainView: View {
         NavigationView {
             ZStack {
                 VStack {
-                    if /*viewModel.userModelPalcerHolder.isEmpty*/users.isEmpty {
+                    if /*viewModel.userModelPalcerHolder.isEmpty*/users.isEmpty{
                         TitleView()
-                            
+                        
                         EmptyView()
                     }else{
                         TitleView()
@@ -45,20 +45,25 @@ struct MainView: View {
                                             .clipShape(Circle())
                                             .overlay {Circle().stroke(lineWidth: 1.0)}
                                             .padding(.trailing)
-                                        Text(user.name)
-                                            .padding(.trailing)
-                                        VStack {
-                                            Text(user.amount)
+                                        VStack(alignment: .leading) {
+                                            Text(user.name)
+                                                .lineLimit(2)
+                                                .minimumScaleFactor(0.9)
+                                                .font(.system(size: 20, weight: .bold, design: .monospaced))
+                                            Text(viewModel.calFinalPayment(user: user))
                                                 .padding(.bottom, 1)
                                                 .minimumScaleFactor(0.1)
                                         }
+                                        Spacer()
+                                        VStack{
+                                            Text("Due Date")
+                                                .font(.system(size: 17, weight:.bold))
+                                            Text(user.dueDate)
+                                                .font(.system(.callout, weight: .medium))
+                                        }
                                     }
-                                    .font(.system(size: 20, weight: .bold, design: .monospaced))
-                                    .lineLimit(1)
-                                    .onAppear{
-                                        print(user.avatarImage)
-                                        user.avatarImageData = user.avatarImage.pngData()
-                                    }
+                                    
+                                    
                                 }
                                 .swipeActions(edge: .leading, allowsFullSwipe: false, content: {
                                     Button {
@@ -121,13 +126,17 @@ struct MainView: View {
                     NavigationLink(destination: EntryView(users: users)) {
                         Image(systemName: "plus")
                             .tint(Color(uiColor: UIColor(named: "TrackerColor")!))
-
+                        
                     }
                 }
             })
             
             .onAppear {
                 NotificationManager().requestAuthorization()
+                if !users.isEmpty {
+                    print(users[0].initialValue)
+                }
+                
             }
             .background {
                 BlurBackground()
@@ -137,7 +146,7 @@ struct MainView: View {
     }
     func deleteFromContainer(index: Int){
         
-            context.delete(users[index])
+        context.delete(users[index])
         
     }
 }
@@ -145,7 +154,7 @@ struct MainView: View {
 #Preview {
     
     MainView()
-        
+    
         .environmentObject(DataViewModel(usersInfo: UserModel(id: UUID(),
                                                               name: "Josh Flores",
                                                               amount: "$3,000.00",

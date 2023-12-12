@@ -37,6 +37,7 @@ class UserModel: Identifiable {
         "Rewards": ["-","Good Grades", "Chores", "Good Behavior", "Birthday"]
     ]
     
+    
     init(id: UUID, name: String, amount: String, avatarImageData: Data?, initialValue: [String], secondValue: [String], valueHolder: [String], steps: Int, dueDate: String, billsArray: [String : [String]]) {
         self.id = id
         self.name = name

@@ -7,23 +7,102 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1A163811-7027-448B-A965-A4ABAC8BC46F"
-            shouldBeEnabled = "Yes"
+            uuid = "D78EB301-DC9D-45B0-9ECC-9F3AD490D8D0"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AllowanceAgent/ViewModel/DataViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "375"
-            endingLineNumber = "375"
-            landmarkName = "showAlert(name:amount:)"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "deleteFromContainer(index:user:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D78EB301-DC9D-45B0-9ECC-9F3AD490D8D0"
+            uuid = "B98094D5-CBCC-4429-A637-0D3BB910D0BC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AllowanceAgent/View/DetailView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "B98094D5-CBCC-4429-A637-0D3BB910D0BC - 2e469ded245677d1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in AllowanceAgent.DetailView.body.getter : some"
+                  moduleName = "AllowanceAgent"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/EXT%20DRIVE/AllowanceAgent/AllowanceAgent/View/DetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "952">
+               </Location>
+               <Location
+                  uuid = "B98094D5-CBCC-4429-A637-0D3BB910D0BC - 67c98f810d43e9f5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in AllowanceAgent.DetailView.body.getter : some"
+                  moduleName = "AllowanceAgent"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/EXT%20DRIVE/AllowanceAgent/AllowanceAgent/View/DetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "B98094D5-CBCC-4429-A637-0D3BB910D0BC - 67c98f810d43e9f5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in AllowanceAgent.DetailView.body.getter : some"
+                  moduleName = "AllowanceAgent"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/EXT%20DRIVE/AllowanceAgent/AllowanceAgent/View/DetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4CB8EAC2-CEF4-4A9B-96A4-C1236B56A4A5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AllowanceAgent/ViewModel/DataViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "addValueToArray(steps:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "21568172-1CA3-4B88-80E3-4801F9350961"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -32,71 +111,56 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "188"
             endingLineNumber = "188"
-            landmarkName = "deleteFromContainer(index:user:)"
+            landmarkName = "addValueToArray(steps:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "21568172-1CA3-4B88-80E3-4801F9350961 - 1881094ecc8da555"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AllowanceAgent.DataViewModel.addValueToArray(steps: Swift.Int) -&gt; ()"
+                  moduleName = "AllowanceAgent"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/EXT%20DRIVE/AllowanceAgent/AllowanceAgent/ViewModel/DataViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "188"
+                  endingLineNumber = "188"
+                  offsetFromSymbolStart = "904">
+               </Location>
+               <Location
+                  uuid = "21568172-1CA3-4B88-80E3-4801F9350961 - 1881094ecc8da555"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AllowanceAgent.DataViewModel.addValueToArray(steps: Swift.Int) -&gt; ()"
+                  moduleName = "AllowanceAgent"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/EXT%20DRIVE/AllowanceAgent/AllowanceAgent/ViewModel/DataViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "188"
+                  endingLineNumber = "188"
+                  offsetFromSymbolStart = "900">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0CEAFE89-1438-4255-B206-5A94DD46305B"
-            shouldBeEnabled = "Yes"
+            uuid = "9A9FA6A7-7BCF-4498-820A-1BB7B2442BF5"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AllowanceAgent/View/EntryView.swift"
+            filePath = "AllowanceAgent/View/EditUserView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "0CEAFE89-1438-4255-B206-5A94DD46305B - 81df65e78a653828"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #2 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.TextField&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.confirmationDialog&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_1_0: SwiftUI.View, &#x3c4;_1_1: SwiftUI.View&gt;(_: SwiftUI.LocalizedStringKey, isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, titleVisibility: SwiftUI.Visibility, actions: () -&gt; &#x3c4;_1_0, message: () -&gt; &#x3c4;_1_1) -&gt; some&gt;&gt;.0 in AllowanceAgent.EntryView.body.getter : some"
-                  moduleName = "AllowanceAgent"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/EXT%20DRIVE/AllowanceAgent/AllowanceAgent/View/EntryView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "141"
-                  endingLineNumber = "141"
-                  offsetFromSymbolStart = "620">
-               </Location>
-               <Location
-                  uuid = "0CEAFE89-1438-4255-B206-5A94DD46305B - 81df65e78a653828"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #2 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.TextField&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.confirmationDialog&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_1_0: SwiftUI.View, &#x3c4;_1_1: SwiftUI.View&gt;(_: SwiftUI.LocalizedStringKey, isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, titleVisibility: SwiftUI.Visibility, actions: () -&gt; &#x3c4;_1_0, message: () -&gt; &#x3c4;_1_1) -&gt; some&gt;&gt;.0 in AllowanceAgent.EntryView.body.getter : some"
-                  moduleName = "AllowanceAgent"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/EXT%20DRIVE/AllowanceAgent/AllowanceAgent/View/EntryView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "141"
-                  endingLineNumber = "141"
-                  offsetFromSymbolStart = "444">
-               </Location>
-               <Location
-                  uuid = "0CEAFE89-1438-4255-B206-5A94DD46305B - 81df65e78a653828"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #2 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.TextField&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.confirmationDialog&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_1_0: SwiftUI.View, &#x3c4;_1_1: SwiftUI.View&gt;(_: SwiftUI.LocalizedStringKey, isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, titleVisibility: SwiftUI.Visibility, actions: () -&gt; &#x3c4;_1_0, message: () -&gt; &#x3c4;_1_1) -&gt; some&gt;&gt;.0 in AllowanceAgent.EntryView.body.getter : some"
-                  moduleName = "AllowanceAgent"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/EXT%20DRIVE/AllowanceAgent/AllowanceAgent/View/EntryView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "141"
-                  endingLineNumber = "141"
-                  offsetFromSymbolStart = "500">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

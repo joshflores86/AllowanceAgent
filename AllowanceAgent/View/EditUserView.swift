@@ -16,6 +16,7 @@ struct EditUserView: View {
     @State var step: Int
     @State var newPhoto: Bool = false
     @State var cameraIsSelected: Bool = false
+    @State var showAnimatedPic: Bool = false
     @State var showConfirmation = false
     @State var imageSelector: Bool = false
     @State var showCustomBillAlert = false
@@ -50,7 +51,7 @@ struct EditUserView: View {
                             .overlay {Circle().stroke(lineWidth: 1.0)}
                             .padding(.bottom, 10)
                             .onTapGesture {
-                                imageSelector = true
+                                newPhoto = true
                                 print("Works")
                             }
                         
@@ -58,6 +59,7 @@ struct EditUserView: View {
                             .textFieldStyle(.roundedBorder)
                         TextField("Enter Amount", text: $users.amount)
                             .textFieldStyle(.roundedBorder)
+                            .keyboardType(.decimalPad)
                             .onChange(of: users.amount) {
                                 users.amount = viewModel.changeToCurrencyValue(value: users.amount)
                             }
@@ -122,6 +124,7 @@ struct EditUserView: View {
                             }
                             TextField("Enter Amount", text: $users.valueHolder[num])
                                 .textFieldStyle(.roundedBorder)
+                                .keyboardType(.decimalPad)
                                 .onChange(of: users.valueHolder[num]) {
                                     users.valueHolder[num] = viewModel.changeToCurrencyValue(value: users.valueHolder[num])
                                 }
@@ -158,11 +161,28 @@ struct EditUserView: View {
                     }
                 }
             })
-            .onChange(of: step, initial: true, {
+            .alert("Camera 📷, Photo Library 🌁, Person 🙋🏼‍♂️ ", isPresented: $newPhoto, actions: {
+                HStack{
+                    
+                    Button("Camera") {
+                        cameraIsSelected = true
+                        imageSelector = true
+                    }
+                    Button("Photo Library ") {
+                        imageSelector = true
+                        cameraIsSelected = false
+                    }
+                    Button("Avatar") {
+                        showAnimatedPic = true
+                    }
+                }
+            })
+            .onChange(of: step, initial: false, {
                 users.initialValue.append("-")
                 users.secondValue.append("-")
                 users.valueHolder.append("-")
             })
+            
             .background(BlurBackground())
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
@@ -184,11 +204,12 @@ struct EditUserView: View {
             .confirmationDialog("Please Confirm", isPresented: $showConfirmation) {
                 Button("Save") {
                     users.dueDate = formattedDate
+                    users.steps = step
                     users.initialValue = users.initialValue.filter {$0 != "-"}
                     users.secondValue = users.secondValue.filter {$0 != "-"}
                     users.valueHolder = users.valueHolder.filter {$0 != "-"}
                     
-                    print(users.avatarImage)
+                    
                     try? context.save()
                     NotificationManager().scheduleNotification(dueDate: formattedDate, dueTime: dueTime)
                     presentationMode.wrappedValue.dismiss()

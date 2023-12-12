@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080A2C292B255BB500C2FFA4 /* PictureSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A2C282B255BB500C2FFA4 /* PictureSelection.swift */; };
 		0824F4ED2B142AEF00DA1D4C /* PaidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824F4EC2B142AEF00DA1D4C /* PaidView.swift */; };
 		0824F4F02B150B3600DA1D4C /* PaidReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0824F4EF2B150B3600DA1D4C /* PaidReportView.swift */; };
 		083D38132ADF14F100248475 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D38122ADF14F100248475 /* EmptyView.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		080A2C282B255BB500C2FFA4 /* PictureSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureSelection.swift; sourceTree = "<group>"; };
 		0824F4EC2B142AEF00DA1D4C /* PaidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidView.swift; sourceTree = "<group>"; };
 		0824F4EF2B150B3600DA1D4C /* PaidReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidReportView.swift; sourceTree = "<group>"; };
 		083D38122ADF14F100248475 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
@@ -104,6 +106,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080A2C272B255B8D00C2FFA4 /* PictureSelection */ = {
+			isa = PBXGroup;
+			children = (
+				080A2C282B255BB500C2FFA4 /* PictureSelection.swift */,
+			);
+			path = PictureSelection;
+			sourceTree = "<group>";
+		};
 		0824F4EE2B150B0500DA1D4C /* PaidViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +227,7 @@
 				088CA5432AE18FBB00B8488A /* EntryView.swift */,
 				088CA5412AE18F8600B8488A /* DetailView.swift */,
 				08D58E402AFC750F006E5F4B /* EditUserView.swift */,
+				080A2C272B255B8D00C2FFA4 /* PictureSelection */,
 				0824F4EE2B150B0500DA1D4C /* PaidViews */,
 				088CA5452AE18FC600B8488A /* BeautifulScreen */,
 				083D38142ADF154100248475 /* EmptyViews */,
@@ -389,6 +400,7 @@
 				088D3D882ADDB24000D20509 /* DataViewModel.swift in Sources */,
 				08939C172AE03AE700CC49D3 /* TitleView.swift in Sources */,
 				088D3D532ADDAFD200D20509 /* AllowanceAgentApp.swift in Sources */,
+				080A2C292B255BB500C2FFA4 /* PictureSelection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

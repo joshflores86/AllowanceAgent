@@ -18,7 +18,7 @@ struct EntryView: View {
     @State var step = 0
     @State var newPhoto: Bool = false
     @State var cameraIsSelected: Bool = false
-    
+    @State var showAnimatedPic: Bool = false
     @State var showConfirmation = false
     @State var imageSelector: Bool = false
     @State var showCustomBillAlert = false
@@ -61,6 +61,7 @@ struct EntryView: View {
                             .textFieldStyle(.roundedBorder)
                         TextField("Enter Amount", text: $amount)
                             .textFieldStyle(.roundedBorder)
+                            .keyboardType(.decimalPad)
                             .onChange(of: amount) {
                                 amount = viewModel.changeToCurrencyValue(value: amount)
                             }
@@ -123,6 +124,7 @@ struct EntryView: View {
                             }
                             TextField("Enter Amount", text: $viewModel.valuePlacer[num])
                                 .textFieldStyle(.roundedBorder)
+                                .keyboardType(.decimalPad)
                                 .onChange(of: viewModel.valuePlacer[num]) {
                                     viewModel.valuePlacer[num] = viewModel.changeToCurrencyValue(value: viewModel.valuePlacer[num])
                                 }
@@ -163,16 +165,21 @@ struct EntryView: View {
             .alert(isPresented: getAlertBinding(), content: {
                 viewModel.getAlert()
             })
-            .alert("Camera or Photo Library", isPresented: $newPhoto, actions: {
+            .alert("Camera 📷, Photo Library 🌁, Person 🙋🏼‍♂️ ", isPresented: $newPhoto, actions: {
                 HStack{
                     
                     Button("Camera") {
                         cameraIsSelected = true
                         imageSelector = true
                     }
-                    Button("Photo Library") {
+                    Button("Photo Library ") {
                         imageSelector = true
                         cameraIsSelected = false
+                    }
+               //MARK: - Left off here... trying to setup picture selection
+                    
+                    Button("Avatar") {
+                        showAnimatedPic = true
                     }
                 }
             })
@@ -189,14 +196,16 @@ struct EntryView: View {
                     .font(.title2)
                 }
             }
-            
+            .sheet(isPresented: $showAnimatedPic, content: {
+                
+            })
             .sheet(isPresented: $imageSelector, content: {
                 ImagePicker(image: $avatarImage, isCameraSelected: $cameraIsSelected)
                 
             })
             .confirmationDialog("Please Confirm", isPresented: $showConfirmation) {
                 Button("Save") {
-                    viewModel.addValueToArray()
+                    viewModel.addValueToArray(steps: step)
                     viewModel.showAlert(name: name, amount: amount)
                     if !viewModel.showMissingNameAlert &&
                         !viewModel.showMissingAmountAlert &&
