@@ -7,6 +7,7 @@
 
 import Foundation
 import UserNotifications
+import UIKit
 
 class NotificationManager {
     static let instance = NotificationManager()
@@ -21,25 +22,33 @@ class NotificationManager {
             }
         }
     }
+    func removeBubble() {
+        UNUserNotificationCenter.current().setBadgeCount(0)
+    }
     
-    func scheduleNotification(dueDate: String, dueTime: String) {
+    func scheduleNotification(dueDate: String, dueTime: String, name: String) {
         let content = UNMutableNotificationContent()
-        content.title = "Pay day"
+        content.title = "\(name) Pay day"
         content.subtitle = "Payment is due \(dueDate)"
         content.sound = .default
         content.badge = 1
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
-        let dateString = dateFormatter.date(from: "\(dueDate) \(dueTime)")
+        dateFormatter.dateFormat = "MM/dd/yy HH:mm"
+        guard let dateString = dateFormatter.date(from: "\(dueDate) \(dueTime)") else {
+            print("Error: Invalid date format")
+            return
+        }
         
-        guard let newDate = dateString else{return}
         
-        if newDate < Date() {
-            var dateComponents = Calendar.current.dateComponents([.month, .day, .year, .hour, .minute], from: newDate)
+        
+        if dateString > Date() {
+            var dateComponents = Calendar.current.dateComponents([.month, .day, .year, .hour, .minute], from: dateString)
             //            var dateComponents = DateComponents()
-            dateComponents.hour = 16
-            dateComponents.minute = 00
+                        
+            let timeZone = TimeZone(identifier: "America/New_York")
+            dateComponents.timeZone = timeZone
+            
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
             print(trigger.dateComponents.hour!)
             print(trigger.dateComponents.minute!)

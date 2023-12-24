@@ -89,10 +89,11 @@ struct DetailView: View {
                         }
                     }
             }
-//            .onAppear{
-//                finalAmount = viewModel.calFinalPayment(user: user)
-//                
-//            }
+            .onAppear{
+                finalAmount = viewModel.calFinalPayment(user: user)
+                user.finalPayment = finalAmount
+                
+            }
             .background {
                 BlurBackground()
             }
@@ -110,6 +111,7 @@ struct DetailView: View {
                                initialValue: ["Bills", "Bills"],
                                secondValue: ["Phone", "Car Loan"],
                                valueHolder: ["$200.00", "$300.00"],
+                               finalPayment: "",
                                 steps: 2,
                                 dueDate: "02/23/2023",
                                 billsArray: ["":[""]]))
@@ -119,7 +121,7 @@ struct DetailView: View {
                                                           avatarImageData: Data(),
                                                           initialValue: [""],
                                                           secondValue: [""],
-                                                          valueHolder: [""],
+                                                          valueHolder: [""], finalPayment: "",
                                                           steps: 0,
                                                           dueDate: "",
                                                           billsArray: ["":[""]])))

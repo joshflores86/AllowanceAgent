@@ -51,7 +51,7 @@ struct PaidReportView: View {
                         .paidReportFont()
                 }
                 Section(header: Text("Final Payment")) {
-                    Text("$\(userPaid.finalPayment)")
+                    Text(userPaid.finalPayment)
                         .paidReportFont()
                 }
                 

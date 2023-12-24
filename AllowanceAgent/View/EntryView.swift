@@ -27,8 +27,9 @@ struct EntryView: View {
     @State var showCustomRewardAlert = false
     @State var customConfirmation = false
     @State var selectedDate = Date()
-    @State var dueTime: String = "20:00"
+    @State var dueTime: String = "12:28"
     @State var users: [UserModel]
+    @FocusState var dismissKeyboard: Bool
     var formattedDate: String {
         let dateFormat = DateFormatter()
         dateFormat.dateStyle = .short
@@ -59,8 +60,10 @@ struct EntryView: View {
                         
                         TextField("Enter Name", text: $name)
                             .textFieldStyle(.roundedBorder)
+                            .focused($dismissKeyboard)
                         TextField("Enter Amount", text: $amount)
                             .textFieldStyle(.roundedBorder)
+                            .focused($dismissKeyboard)
                             .keyboardType(.decimalPad)
                             .onChange(of: amount) {
                                 amount = viewModel.changeToCurrencyValue(value: amount)
@@ -125,6 +128,7 @@ struct EntryView: View {
                             TextField("Enter Amount", text: $viewModel.valuePlacer[num])
                                 .textFieldStyle(.roundedBorder)
                                 .keyboardType(.decimalPad)
+                                .focused($dismissKeyboard)
                                 .onChange(of: viewModel.valuePlacer[num]) {
                                     viewModel.valuePlacer[num] = viewModel.changeToCurrencyValue(value: viewModel.valuePlacer[num])
                                 }
@@ -183,7 +187,18 @@ struct EntryView: View {
                     }
                 }
             })
-                        .background(BlurBackground())
+            .background(BlurBackground())
+            .toolbar {
+                ToolbarItem(placement: .keyboard) {
+                    HStack{
+                        Spacer()
+                        Button("Done") {
+                            dismissKeyboard = false
+                        }
+                    }
+                   
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button("Save") {
@@ -197,10 +212,13 @@ struct EntryView: View {
                 }
             }
             .sheet(isPresented: $showAnimatedPic, content: {
-                
+                PictureSelection(selectedImage: $avatarImage)
+                    .presentationDetents([.fraction(0.75)])
+                    .environmentObject(viewModel)
             })
             .sheet(isPresented: $imageSelector, content: {
                 ImagePicker(image: $avatarImage, isCameraSelected: $cameraIsSelected)
+                    
                 
             })
             .confirmationDialog("Please Confirm", isPresented: $showConfirmation) {
@@ -211,10 +229,10 @@ struct EntryView: View {
                         !viewModel.showMissingAmountAlert &&
                         !viewModel.showBillAlert && !viewModel.showAmountAlert  {
                         
-                        let user = UserModel(id: UUID(), name: name, amount: amount, avatarImageData: avatarImage.pngData(), initialValue: viewModel.firstValue, secondValue: viewModel.secondValue, valueHolder: viewModel.valuePlacer, steps: step, dueDate: formattedDate, billsArray: viewModel.billsArrayToSave)
+                        let user = UserModel(id: UUID(), name: name, amount: amount, avatarImageData: avatarImage.pngData(), initialValue: viewModel.firstValue, secondValue: viewModel.secondValue, valueHolder: viewModel.valuePlacer, finalPayment: "", steps: step, dueDate: formattedDate, billsArray: viewModel.billsArrayToSave)
                         context.insert(user)
                         
-                        NotificationManager().scheduleNotification(dueDate: formattedDate, dueTime: dueTime)
+                        NotificationManager().scheduleNotification(dueDate: formattedDate, dueTime: dueTime, name: name)
                         presentationMode.wrappedValue.dismiss()
                     }
                     viewModel.firstValue = Array(repeating: "-", count: 50)
@@ -228,6 +246,7 @@ struct EntryView: View {
                 Text("Are you sure you want to save?")
             }
         }
+        .environmentObject(viewModel)
     }
     func getAlertBinding() -> Binding<Bool> {
         if viewModel.showMissingNameAlert{
@@ -243,6 +262,7 @@ struct EntryView: View {
         }
         
     }
+    
 }
 
 #Preview {
@@ -252,7 +272,7 @@ struct EntryView: View {
                                 avatarImageData: Data(),
                                 initialValue: [""],
                                 secondValue: [""],
-                                valueHolder: [""],
+                                valueHolder: [""], finalPayment: "",
                                 steps: 0,
                                 dueDate: "",
                                 billsArray: ["":[""]])])
@@ -262,7 +282,7 @@ struct EntryView: View {
                                                           avatarImageData: Data(),
                                                           initialValue: [""],
                                                           secondValue: [""],
-                                                          valueHolder: [""],
+                                                          valueHolder: [""], finalPayment: "",
                                                           steps: 0,
                                                           dueDate: "",
                                                           billsArray: ["":[""]])))

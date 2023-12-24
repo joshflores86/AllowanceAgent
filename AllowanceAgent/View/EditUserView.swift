@@ -26,6 +26,7 @@ struct EditUserView: View {
     @State var customConfirmation = false
     @State var selectedDate = Date()
     @State var dueTime: String = "20:00"
+    @FocusState var dismissKeyboard: Bool
     @State var users: UserModel
     var formattedDate: String {
         let dateFormat = DateFormatter()
@@ -60,6 +61,7 @@ struct EditUserView: View {
                         TextField("Enter Amount", text: $users.amount)
                             .textFieldStyle(.roundedBorder)
                             .keyboardType(.decimalPad)
+                            .focused($dismissKeyboard)
                             .onChange(of: users.amount) {
                                 users.amount = viewModel.changeToCurrencyValue(value: users.amount)
                             }
@@ -77,9 +79,11 @@ struct EditUserView: View {
                                        displayedComponents: .date)
                         }
                         .padding([.leading, .trailing, .top], 10)
-                        
+                        .onAppear{
+                            print(users.steps)
+                        }
                         HStack {
-                            if step >= 1 {
+                            if users.steps >= 1 {
                                 Button("", systemImage: "dollarsign.circle", action: {
                                     showCustomBillAlert = true
                                 })
@@ -94,17 +98,27 @@ struct EditUserView: View {
                             }
                             
                             Spacer()
-                            Stepper("", value: $step, in: 0...25){ _ in print(step)}
+                            Stepper("", value: $users.steps, in: 0...25){ _ in
+                                print(users.steps)
+                                if users.steps > users.initialValue.count {
+                                    users.initialValue.append("-")
+                                    users.secondValue.append("-")
+                                    users.valueHolder.append("-")
+                                }else if users.steps < users.initialValue.count{
+                                    users.initialValue.removeLast()
+                                    users.secondValue.removeLast()
+                                    users.valueHolder.removeLast()
+                                }
+                            }
                                 .padding(.trailing, 20)
+                                
                         }
                         .padding([.top], 30)
                         .padding([.bottom], 10)
+                        
                     }
-                    
-                    
-                    
-                    
-                    ForEach(0..<step, id: \.self) { num in
+                   
+                    ForEach(0..<users.steps, id: \.self) { num in
                         HStack {
                             VStack{
                                 Picker("", selection: $users.initialValue[num]) {
@@ -125,6 +139,7 @@ struct EditUserView: View {
                             TextField("Enter Amount", text: $users.valueHolder[num])
                                 .textFieldStyle(.roundedBorder)
                                 .keyboardType(.decimalPad)
+                                .focused($dismissKeyboard)
                                 .onChange(of: users.valueHolder[num]) {
                                     users.valueHolder[num] = viewModel.changeToCurrencyValue(value: users.valueHolder[num])
                                 }
@@ -177,19 +192,24 @@ struct EditUserView: View {
                     }
                 }
             })
-            .onChange(of: step, initial: false, {
-                users.initialValue.append("-")
-                users.secondValue.append("-")
-                users.valueHolder.append("-")
-            })
+           
             
             .background(BlurBackground())
             .toolbar {
+                ToolbarItem(placement: .keyboard) {
+                    HStack{
+                        Spacer()
+                        Button("Done") {
+                            dismissKeyboard = false
+                        }
+                    }
+                   
+                }
+            }
+            .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button("Save") {
-                        
                         showConfirmation = true
-                        
                     }
                     .padding()
                     .buttonStyle(.borderedProminent)
@@ -198,20 +218,28 @@ struct EditUserView: View {
                     .font(.title2)
                 }
             }
+            .sheet(isPresented: $showAnimatedPic, onDismiss:  {
+                print("GoodBye")
+                users.avatarImage = avatarImage
+            }){
+                PictureSelection(selectedImage: $avatarImage)
+                    .presentationDetents([.fraction(0.75)])
+                    .environmentObject(viewModel)
+            }
             .sheet(isPresented: $imageSelector, content: {
                 ImagePicker(image: $users.avatarImage, isCameraSelected: $cameraIsSelected)
             })
             .confirmationDialog("Please Confirm", isPresented: $showConfirmation) {
                 Button("Save") {
                     users.dueDate = formattedDate
-                    users.steps = step
-                    users.initialValue = users.initialValue.filter {$0 != "-"}
-                    users.secondValue = users.secondValue.filter {$0 != "-"}
-                    users.valueHolder = users.valueHolder.filter {$0 != "-"}
+                    
+//                    users.initialValue = users.initialValue.filter {$0 != "-"}
+//                    users.secondValue = users.secondValue.filter {$0 != "-"}
+//                    users.valueHolder = users.valueHolder.filter {$0 != "-"}
                     
                     
                     try? context.save()
-                    NotificationManager().scheduleNotification(dueDate: formattedDate, dueTime: dueTime)
+                    NotificationManager().scheduleNotification(dueDate: formattedDate, dueTime: dueTime, name: users.name)
                     presentationMode.wrappedValue.dismiss()
                 }
                 
@@ -225,18 +253,9 @@ struct EditUserView: View {
 
 #Preview {
     
-//    @State var user = UserModel(id: UUID(),
-//                        name: "",
-//                        amount: "",
-//                        avatarImageData: Data(),
-//                        initialValue: ["Bills"],
-//                        secondValue: ["Phone"],
-//                        valueHolder: ["100.00"],
-//                        steps: 0,
-//                        dueDate: "",
-//                        billsArray: ["":[""]])
     
-    EditUserView(avatarImage: UIImage(systemName: "default-avatar")!,
+    
+    return EditUserView(avatarImage: UIImage(systemName: "default-avatar")!,
                  step: 0,
                  customBill: "",
                  customReward: "",
@@ -248,6 +267,7 @@ struct EditUserView: View {
                                   initialValue: ["Bills"],
                                   secondValue: ["Phone"],
                                   valueHolder: ["100.00"],
+                                  finalPayment: "",
                                   steps: 0,
                                   dueDate: "",
                                   billsArray: ["":[""]]) )
@@ -258,6 +278,7 @@ struct EditUserView: View {
                                                               initialValue: ["Bills"],
                                                               secondValue: ["Phone"],
                                                               valueHolder: ["100.00"],
+                                                              finalPayment: "",
                                                               steps: 0,
                                                               dueDate: "",
                                                               billsArray: ["":[""]])))

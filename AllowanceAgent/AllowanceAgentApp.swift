@@ -33,9 +33,13 @@ struct AllowanceAgentApp: App {
                                                                        initialValue: [""],
                                                                        secondValue: [""],
                                                                        valueHolder: [""],
+                                                                       finalPayment: "",
                                                                        steps: 0,
                                                                        dueDate: "",
                                                                        billsArray: ["":[""]])))
+            .onAppear{
+                UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+            }
         }
         .modelContainer(mainModelContainer)    }
 }

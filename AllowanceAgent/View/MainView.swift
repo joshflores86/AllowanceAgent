@@ -82,7 +82,7 @@ struct MainView: View {
                                                                      initialValue: user.initialValue,
                                                                      secondValue: user.secondValue,
                                                                      valueHolder: user.valueHolder,
-                                                                     finalPayment: String(format: "%.2f", viewModel.calFinalPayment(user: user)),
+                                                                     finalPayment: user.finalPayment,
                                                                      steps: user.steps,
                                                                      dueDate: user.dueDate,
                                                                      paidDate: viewModel.todaysDate(),
@@ -96,7 +96,8 @@ struct MainView: View {
                                 })
                                 .sheet(isPresented: $showEditUserView) {
                                     EditUserView(avatarImage: user.avatarImage, step: user.steps, users: user)
-                                        .presentationDetents([.fraction(0.75)])
+                                        .presentationDetents([.fraction(1.0)])
+                                        .environmentObject(viewModel)
                                 }
                             }
                             
@@ -133,6 +134,7 @@ struct MainView: View {
             
             .onAppear {
                 NotificationManager().requestAuthorization()
+                NotificationManager().removeBubble()
                 if !users.isEmpty {
                     print(users[0].initialValue)
                 }
@@ -161,7 +163,7 @@ struct MainView: View {
                                                               avatarImageData: Data(),
                                                               initialValue: [""],
                                                               secondValue: [""],
-                                                              valueHolder: [""],
+                                                              valueHolder: [""], finalPayment: "",
                                                               steps: 0,
                                                               dueDate: "",
                                                               billsArray: ["":[""]])))

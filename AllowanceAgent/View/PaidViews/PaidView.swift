@@ -12,11 +12,10 @@ struct PaidView: View {
     @EnvironmentObject var viewModel: DataViewModel
     @Environment(\.modelContext) var context
     @State var paid = false
-    @Query var userPaid: [UserPaidModel]
+    @Query(sort: \UserPaidModel.paidDate) var userPaid: [UserPaidModel]
     
     var body: some View {
         VStack{
-            
             if userPaid.isEmpty /*viewModel.placeHolder.isEmpty*/ {
                 EmptyView3()
             }else{
@@ -51,11 +50,11 @@ struct PaidView: View {
                             }
                         }
                     }
-//                    .onDelete(perform: { indexSet in
-//                        for index in indexSet {
-//                            context.delete(userPaid[index])
-//                        }
-//                    })
+                    .onDelete(perform: { indexSet in
+                        for index in indexSet {
+                            context.delete(userPaid[index])
+                        }
+                    })
                 }
                 
             }
@@ -72,6 +71,7 @@ struct PaidView: View {
                                                               initialValue: [""],
                                                               secondValue: [""],
                                                               valueHolder: [""],
+                                                              finalPayment: "",
                                                               steps: 0,
                                                               dueDate: "",
                                                               billsArray: ["":[""]])))}

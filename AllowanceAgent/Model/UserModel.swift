@@ -19,6 +19,7 @@ class UserModel: Identifiable {
     var initialValue: [String]
     var secondValue: [String]
     var valueHolder: [String]
+    var finalPayment: String
     var steps: Int = 0
     var dueDate: String
     var avatarImage: UIImage {
@@ -38,7 +39,7 @@ class UserModel: Identifiable {
     ]
     
     
-    init(id: UUID, name: String, amount: String, avatarImageData: Data?, initialValue: [String], secondValue: [String], valueHolder: [String], steps: Int, dueDate: String, billsArray: [String : [String]]) {
+    init(id: UUID, name: String, amount: String, avatarImageData: Data?, initialValue: [String], secondValue: [String], valueHolder: [String], finalPayment: String, steps: Int, dueDate: String, billsArray: [String : [String]]) {
         self.id = id
         self.name = name
         self.amount = amount
@@ -46,6 +47,7 @@ class UserModel: Identifiable {
         self.initialValue = initialValue
         self.secondValue = secondValue
         self.valueHolder = valueHolder
+        self.finalPayment = finalPayment
         self.steps = steps
         self.dueDate = dueDate
         self.billsArray = billsArray

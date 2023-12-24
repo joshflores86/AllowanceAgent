@@ -37,7 +37,8 @@ class DataViewModel: ObservableObject {
     @Published var showCustomTextAlert = false
     @Published var hideButton: Bool = false
     @Published var animatedProfilePic: Array = [
-        Image("Boy_Pic"), Image("Boy_Pic2"), Image("Boy_Pic3")
+        "Boy_Pic", "Boy_Pic2", "Boy_Pic3", "Boy_Pic4", 
+        "Girl_Pic", "Girl_Pic2", "Girl_Pic3", "Girl_Pic4"
     ]
     @Published var valueHolder: String = ""
     @Published var userModelPalcerHolder = [
@@ -47,7 +48,9 @@ class DataViewModel: ObservableObject {
                       avatarImageData: Data(),
                       initialValue: ["Bills", "Bills"],
                       secondValue: ["Phone", "Car Loan"],
-                      valueHolder: ["$200.00", "$300.00"],
+                  
+                  valueHolder: ["$200.00", "$300.00"],
+                  finalPayment: "",
                       steps: 2,
                       dueDate: "2/23/2023",
                       billsArray: ["":[""]]) ,
@@ -57,7 +60,8 @@ class DataViewModel: ObservableObject {
                       avatarImageData: Data(),
                       initialValue: ["Bills", "Bills"],
                       secondValue: ["Phone", "Car Loan"],
-                      valueHolder: ["$800.00", "$300.00"],
+                  valueHolder: ["$800.00", "$300.00"], 
+                  finalPayment: "",
                       steps: 2,
                       dueDate: "2/23/2023",
                       billsArray: ["":[""]])
@@ -98,38 +102,11 @@ class DataViewModel: ObservableObject {
         
     }
     
-    func saveInfo(name: String, amount: String, selectImage: UIImage, steps: Int, dueDate: String) {
-        //        usersInfoArray.append(UserModel(id: UUID(), name: name, amount: amount, avatarImageData: selectImage.pngData(), initialValue: firstValue, secondValue: secondValue, valueHolder: valuePlacer, steps: steps, dueDate: dueDate, billsArray: usersInfo.billsArray))
-        
-        
-    }
     
     
     
-    //MARK: - App Storage code
     
-    //    private var documentDirectory: URL {
-    //        get{
-    //            try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-    //        }
-    //    }
-    //    private var notesFile: URL {
-    //        documentDirectory.appendingPathComponent("usersInfo").appendingPathExtension(for: .json)
-    //    }
-    //
-    //    func save() throws {
-    //        let data = try JSONEncoder().encode(usersInfoArray)
-    //        try data.write(to: notesFile)
-    //        print("Saved")
-    //    }
-    //    func load() throws {
-    //        guard FileManager.default.isReadableFile(atPath: notesFile.path) else {return}
-    //        let data = try Data(contentsOf: notesFile)
-    //        usersInfoArray = try JSONDecoder().decode([UserModel].self, from: data)
-    //        print("Loaded")
-    //    }
-    //
-    //MARK: - Function adding values
+    
     
     func sumOfBills(user: UserModel) -> Double {
         var finalPay = 0.00
@@ -147,7 +124,7 @@ class DataViewModel: ObservableObject {
                 let noCommaOr$ = noCommaRewards.replacingOccurrences(of: "$", with: "")
                 finalPay -= Double(noCommaOr$) ?? 0.00
             }
-            print(finalPay)
+//            print(finalPay)
         }
         return finalPay
     }
@@ -180,32 +157,25 @@ class DataViewModel: ObservableObject {
     
     func addValueToArray(steps: Int) {
         valuePlacer = valuePlacer.filter {$0 != ""}
-        print(valuePlacer)
         secondValue = secondValue.filter {$0 != "-"}
-        print(secondValue)
         firstValue = firstValue.filter {$0 != "-"}
-        print(firstValue)
-        for _ in 0..<steps {
-            firstValue.append("-")
-            secondValue.append("-")
-            valuePlacer.append("-")
-        }
         
-    }
-    
-   /* func cleanUpArray(value: [UserModel]) {
-        
-        for item in value.indices {
-            
-        }
-        
-    }*/
-    
-    func deleteFromContainer(index: IndexSet, user: [UserModel]){
-        for num in index{
-            context.delete(user[num])
+        for _ in 0...steps {
+            if firstValue.count < steps {
+                firstValue.append("-")
+            }
+            if secondValue.count < firstValue.count{
+                secondValue.append("-")
+            }
+            if valuePlacer.count < firstValue.count{
+                valuePlacer.append("-")
+            }
         }
     }
+    
+   
+    
+    
     
     func changeToCurrencyValue(value: String) -> String {
         var modifiedValue = ""
@@ -224,77 +194,18 @@ class DataViewModel: ObservableObject {
     }
     
     
-    func addingCurrencySym(value: String) -> String {
-        var finalPayment = ""
-        if let num = Double(value) {
-            let format = NumberFormatter()
-            format.numberStyle = .currency
-            format.currencyCode = "USD"
-            format.currencySymbol = "$"
-            if let finalFormat = format.string(from: num as NSNumber){
-                finalPayment = finalFormat
-            }
-        }
-        return finalPayment
-    }
+    
     
     
     func dismissKeyboard() {
         //        UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.endEditing(true)
     }
     
-    //MARK: - Custom Bills and Rewards function
-    
-    func customBill(bill: String){
-        usersInfo.billsArray["Bills"]?.append(bill)
-    }
-    
-    func customReward(reward: String) {
-        usersInfo.billsArray["Rewards"]?.append(reward)
-    }
-    
-    
-    //MARK: - Function for updating users info
     
     
     
-    func saveUpdatedUserInfo(index: Array<UserModel>.Index, name: String, amount: String, image: UIImage, dueDate: String) {
-        print(index)
-        usersInfoArray[index].amount = amount
-        usersInfoArray[index].name = name
-        usersInfoArray[index].avatarImage = image
-        usersInfoArray[index].dueDate = dueDate
-        
-        //        try? save()
-        
-    }
     
     
-//    func saveUpdatedBillsRewards(index: Array<UserModel>.Index, firstValue: [String], secondValue: [String], mainValue: [String], steps: Int) {
-//        usersInfoArray[index].initialValue.removeAll()
-//        usersInfoArray[index].secondValue.removeAll()
-//        usersInfoArray[index].valueHolder.removeAll()
-//        usersInfoArray[index].steps = steps
-//        for i in firstValue{
-//            if i != "-" {
-//                usersInfoArray[index].initialValue.insert(i, at: 0)
-//            }
-//        }
-//        print(usersInfoArray[index].initialValue)
-//        for i in secondValue{
-//            if i != "-" {
-//                usersInfoArray[index].secondValue.insert(i, at: 0)
-//            }
-//        }
-//        print(usersInfoArray[index].secondValue)
-//        for i in mainValue{
-//            if i != "-" {
-//                usersInfoArray[index].valueHolder.insert(i, at: 0)
-//            }
-//        }
-//        print(usersInfoArray[index].valueHolder)
-//        //        try? save()
-//    }
     
     
     func todaysDate() -> String {
@@ -345,34 +256,7 @@ class DataViewModel: ObservableObject {
     
     
     
-    //MARK: - ActionSheet Alert function
     
-//    func confirmBillRewardsActionSheet(index: Array<UserModel>.Index,firstValue: [String],
-//                                       secondValue: [String], mainValue: [String], steps: Int) -> ActionSheet {
-//        
-//        let saveButton: ActionSheet.Button = .default(Text("Save")) {
-//            self.saveUpdatedBillsRewards(index: index,
-//                                         firstValue: firstValue,
-//                                         secondValue: secondValue,
-//                                         mainValue: mainValue,
-//                                         steps: steps)
-//        }
-//        return ActionSheet(title: Text("Bills and Rewards"), message: Text("Are you sure you want to save?"), buttons: [saveButton, .cancel()])
-//    }
-//    
-//    func confirmUserEditActionSheet(index: Array<UserModel>.Index, userName: String,
-//                                    userAmount: String, avatarImage: UIImage, dueDate: String) -> ActionSheet {
-//        
-//        let saveButton: ActionSheet.Button = .default(Text("Save")) {
-//            self.saveUpdatedUserInfo(index: index,
-//                                     name: userName,
-//                                     amount: userAmount,
-//                                     image: avatarImage,
-//                                     dueDate: dueDate)
-//        }
-//        return ActionSheet(title: Text("User Info"), message: Text("Are you sure you want to save?"), buttons: [saveButton, .cancel()])
-//    }
-//    
         
     
     

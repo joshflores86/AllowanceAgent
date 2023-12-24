@@ -75,6 +75,7 @@ struct SplashScreen: View {
                                                                initialValue: [],
                                                                secondValue: [],
                                                                valueHolder: [],
+                                                               finalPayment: "",
                                                                steps: 0,
                                                                dueDate: "", 
                                                                billsArray: ["":[""]])))
