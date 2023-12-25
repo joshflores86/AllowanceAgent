@@ -99,6 +99,11 @@ struct MainView: View {
                                         .presentationDetents([.fraction(1.0)])
                                         .environmentObject(viewModel)
                                 }
+                                .onAppear {
+                                    if !users.isEmpty{
+                                        user.finalPayment = viewModel.calFinalPayment(user: user)
+                                    }
+                                }
                             }
                             
                             .onDelete { indexSet in
@@ -133,12 +138,9 @@ struct MainView: View {
             })
             
             .onAppear {
+                
                 NotificationManager().requestAuthorization()
                 NotificationManager().removeBubble()
-                if !users.isEmpty {
-                    print(users[0].initialValue)
-                }
-                
             }
             .background {
                 BlurBackground()

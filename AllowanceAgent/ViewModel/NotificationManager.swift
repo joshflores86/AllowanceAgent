@@ -28,7 +28,7 @@ class NotificationManager {
     
     func scheduleNotification(dueDate: String, dueTime: String, name: String) {
         let content = UNMutableNotificationContent()
-        content.title = "\(name) Pay day"
+        content.title = "\(name) PAY DAY"
         content.subtitle = "Payment is due \(dueDate)"
         content.sound = .default
         content.badge = 1

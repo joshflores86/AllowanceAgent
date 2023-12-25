@@ -27,9 +27,17 @@ struct EntryView: View {
     @State var showCustomRewardAlert = false
     @State var customConfirmation = false
     @State var selectedDate = Date()
-    @State var dueTime: String = "12:28"
+//    @State var dueTime = ""
     @State var users: [UserModel]
     @FocusState var dismissKeyboard: Bool
+    var formattedTimes: String {
+        let calendar = Calendar.current
+        let newDate = calendar.date(byAdding: .minute, value: 5, to: selectedDate)
+        
+        let timeFormat = DateFormatter()
+        timeFormat.dateFormat = "HH:mm"
+        return timeFormat.string(from: newDate ?? selectedDate) 
+    }
     var formattedDate: String {
         let dateFormat = DateFormatter()
         dateFormat.dateStyle = .short
@@ -232,7 +240,7 @@ struct EntryView: View {
                         let user = UserModel(id: UUID(), name: name, amount: amount, avatarImageData: avatarImage.pngData(), initialValue: viewModel.firstValue, secondValue: viewModel.secondValue, valueHolder: viewModel.valuePlacer, finalPayment: "", steps: step, dueDate: formattedDate, billsArray: viewModel.billsArrayToSave)
                         context.insert(user)
                         
-                        NotificationManager().scheduleNotification(dueDate: formattedDate, dueTime: dueTime, name: name)
+                        NotificationManager().scheduleNotification(dueDate: formattedDate, dueTime: formattedTimes, name: name)
                         presentationMode.wrappedValue.dismiss()
                     }
                     viewModel.firstValue = Array(repeating: "-", count: 50)
