@@ -239,7 +239,7 @@ struct EditUserView: View {
                     
                     
                     try? context.save()
-                    NotificationManager().scheduleNotification(dueDate: formattedDate, dueTime: dueTime, name: users.name)
+                    NotificationManager().scheduleNotification(dueDate: formattedDate, dueTime: dueTime, name: users.name, user: users)
                     presentationMode.wrappedValue.dismiss()
                 }
                 

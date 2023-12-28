@@ -89,6 +89,7 @@ struct MainView: View {
                                                                      billsArray: user.billsArray)
                                         context.insert(paidUser)
                                         deleteFromContainer(index: users.firstIndex(where: {$0 == $0})!)
+                                        NotificationManager().removeNotification(withID: user.notifID)
                                     } label: {
                                         Image(systemName: "dollarsign.square.fill")
                                     }
@@ -102,6 +103,7 @@ struct MainView: View {
                                 .onAppear {
                                     if !users.isEmpty{
                                         user.finalPayment = viewModel.calFinalPayment(user: user)
+                                        
                                     }
                                 }
                             }
@@ -109,7 +111,9 @@ struct MainView: View {
                             .onDelete { indexSet in
                                 for index in indexSet{
                                     context.delete(users[index])
+                                    NotificationManager().removeNotification(withID: users[index].notifID)
                                 }
+                                
                             }
                         }
                         
@@ -141,6 +145,8 @@ struct MainView: View {
                 
                 NotificationManager().requestAuthorization()
                 NotificationManager().removeBubble()
+                NotificationManager().printNotifications()
+              
             }
             .background {
                 BlurBackground()
@@ -153,6 +159,7 @@ struct MainView: View {
         context.delete(users[index])
         
     }
+    
 }
 
 #Preview {

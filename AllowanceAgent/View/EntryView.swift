@@ -240,7 +240,7 @@ struct EntryView: View {
                         let user = UserModel(id: UUID(), name: name, amount: amount, avatarImageData: avatarImage.pngData(), initialValue: viewModel.firstValue, secondValue: viewModel.secondValue, valueHolder: viewModel.valuePlacer, finalPayment: "", steps: step, dueDate: formattedDate, billsArray: viewModel.billsArrayToSave)
                         context.insert(user)
                         
-                        NotificationManager().scheduleNotification(dueDate: formattedDate, dueTime: formattedTimes, name: name)
+                        NotificationManager().scheduleNotification(dueDate: formattedDate, dueTime: formattedTimes, name: name, user: user)
                         presentationMode.wrappedValue.dismiss()
                     }
                     viewModel.firstValue = Array(repeating: "-", count: 50)

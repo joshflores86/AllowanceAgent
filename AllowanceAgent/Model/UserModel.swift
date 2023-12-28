@@ -12,7 +12,8 @@ import SwiftData
 
 @Model
 class UserModel: Identifiable {
-    let id: UUID
+    var id: UUID
+    var notifID = UUID().uuidString
     var name: String
     var amount: String
     var avatarImageData: Data?

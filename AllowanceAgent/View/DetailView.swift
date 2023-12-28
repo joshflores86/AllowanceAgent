@@ -18,9 +18,9 @@ struct DetailView: View {
   
     
     
-    var index: Array<UserModel>.Index {
-        viewModel.usersInfoArray.firstIndex(where: {$0.id == self.id("Identifier") as? UUID}) ?? 0
-    }
+//    var index: Array<UserModel>.Index {
+//        viewModel.usersInfoArray.firstIndex(where: {$0.id == self.id("Identifier") as? UUID}) ?? 0
+//    }
     
     var body: some View {
         ZStack{
@@ -71,7 +71,7 @@ struct DetailView: View {
                 }
                 Spacer()
                     List {
-                        ForEach(0..<user.initialValue.count) { num in
+                        ForEach(0..<user.initialValue.count, id: \.self) { num in
                             HStack {
                                 VStack(alignment: .leading) {
                                     Text(user.initialValue[num])
@@ -105,7 +105,7 @@ struct DetailView: View {
     
     
     DetailView(user: UserModel(id: UUID(),
-                                name: "Josh Flores",
+                               name: "Josh Flores",
                                 amount: "$2,000.00",
                                 avatarImageData: Data(),
                                initialValue: ["Bills", "Bills"],

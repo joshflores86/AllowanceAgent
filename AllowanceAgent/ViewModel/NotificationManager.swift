@@ -19,6 +19,7 @@ class NotificationManager {
                 print("Error \(error)")
             }else{
                 print("SUCCESS")
+                
             }
         }
     }
@@ -26,12 +27,31 @@ class NotificationManager {
         UNUserNotificationCenter.current().setBadgeCount(0)
     }
     
-    func scheduleNotification(dueDate: String, dueTime: String, name: String) {
+    func printNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.getPendingNotificationRequests { requests in
+                    for request in requests {
+                        print("Identifier: \(request.identifier)")
+                        print("-----")
+                    }
+                }
+    }
+    
+    func removeNotification(withID identifier: String) {
+        let center = UNUserNotificationCenter.current()
+        center.removePendingNotificationRequests(withIdentifiers: [identifier])
+    }
+    
+    
+    func scheduleNotification(dueDate: String, dueTime: String, name: String, user: UserModel) {
+        
         let content = UNMutableNotificationContent()
         content.title = "\(name) PAY DAY"
         content.subtitle = "Payment is due \(dueDate)"
         content.sound = .default
         content.badge = 1
+        
+        
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yy HH:mm"
@@ -54,7 +74,8 @@ class NotificationManager {
             print(trigger.dateComponents.minute!)
             let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request) { error in
-                
+                user.notifID = request.identifier
+                print(request.identifier)
                 if let error = error {
                     print("Error Scheduling Notification \(error)")
                 }else{
